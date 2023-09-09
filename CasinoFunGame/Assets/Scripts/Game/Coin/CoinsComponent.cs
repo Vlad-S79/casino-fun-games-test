@@ -41,12 +41,14 @@ namespace Game.Coin
 
         private void SetCoins(int value)
         {
-            if (Coins != value)
+            var oldValue = Coins;
+            Coins = value;
+            
+            if (oldValue != value)
             {
                 OnCoinsChange?.Invoke();
             }
             
-            Coins = value;
             PlayerPrefs.SetInt(_coinsKey, value);
             PlayerPrefs.Save();
         }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ui_component_scriptable_object
   m_EditorClassIdentifier: 
   _container:
-    values: []
+    values:
+    - {fileID: 7202048868385806284, guid: 8ca3d22902c654d07a1ccced473d47d5, type: 3}
+    - {fileID: 618162206759972825, guid: 8ba3313d5329544598452f870a994bde, type: 3}
   _canvas: {fileID: 8510522992563863634, guid: 089f5561c120b4953b66a0b9d866eb44, type: 3}
   _eventSystem: {fileID: 1408304350869908453, guid: f413a55270c504073a7a15654865c7f3, type: 3}

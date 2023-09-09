@@ -18,9 +18,9 @@ namespace Core.Ui
         
         public void Open()
         {
-            // var siblingIndex = _uiComponent.GetSiblingIndex(_windowType);
-            var siblingIndex = 0;
-            transform.SetSiblingIndex(siblingIndex);
+            var siblingIndex = _uiComponent.GetSiblingIndex(_windowType);
+            // var siblingIndex = 0;
+            transform.SetSiblingIndex(siblingIndex + 1);
 
             if (!_isHaveAnimation)
             {

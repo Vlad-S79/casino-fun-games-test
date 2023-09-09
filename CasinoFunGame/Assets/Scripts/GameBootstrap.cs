@@ -1,3 +1,4 @@
+using DefaultNamespace.Game;
 using Game.Coin;
 using Game.SlotsLogic;
 using Zenject;
@@ -10,6 +11,8 @@ namespace DefaultNamespace
         {
             Container.Bind<CoinsComponent>().AsSingle().NonLazy();
             Container.Bind<SlotsLogicComponent>().AsSingle().NonLazy();
+            
+            Container.Bind<GameEnterPoint>().AsSingle().NonLazy();
         }
     }
 }
