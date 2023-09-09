@@ -16,8 +16,7 @@ namespace Game.UI
         [SerializeField] private Transform _wheelTransform;
         [SerializeField] private Transform _arrowTransform;
         [SerializeField] private Button _spinButton;
-
-        private float _wheelAnimationTime = 3;
+        
         private int _step = 36;
         private float _wheelSpeed = 777;
         private int _delay = 2000;

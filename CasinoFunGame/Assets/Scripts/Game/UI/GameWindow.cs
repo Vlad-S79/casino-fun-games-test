@@ -39,8 +39,7 @@ namespace Game.UI
 
         private int _defaultBetValue = 100;
         private int _currentBetValue;
-
-        private int _minBetValue = 100;
+        
         private int _stepAddMinusBetValue = 100;
 
         private bool _isSpin;
