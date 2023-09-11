@@ -1,8 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using Core.Audio;
 using Core.Ui;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 using Random = System.Random;
 
 namespace Game.UI
@@ -19,7 +21,7 @@ namespace Game.UI
         
         private int _step = 36;
         private float _wheelSpeed = 777;
-        private int _delay = 2000;
+        private int _delay = 4000;
         private int _finishDelay = 2000;
 
         private int _offset = 4;
@@ -37,6 +39,14 @@ namespace Game.UI
             1, 5, 2, 10, 3, 1, 5, 2, 10, 3
         };
 
+        private AudioComponent _audioComponent;
+        
+        [Inject]
+        private void Init(AudioComponent audioComponent)
+        {
+            _audioComponent = audioComponent;
+        }
+        
         protected override void OnOpen()
         {
             _isActive = true;
@@ -47,6 +57,8 @@ namespace Game.UI
 
         private async void StartWheelAnimationAsync()
         {
+            _audioComponent.Play("button");
+            _audioComponent.Play("spin_wheel");
             _isNeedRotateWheel = true;
             while (_isNeedRotateWheel)
             {
@@ -72,6 +84,7 @@ namespace Game.UI
 
         private void FinishSpin()
         {
+            _audioComponent.Play("pick");
             Debug.Log(_fs[_finalSlotIndex]);
         }
 

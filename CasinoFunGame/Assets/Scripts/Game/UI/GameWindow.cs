@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Core.Audio;
 using Core.Ui;
 using Game.Coin;
 using Game.Data;
@@ -48,15 +49,19 @@ namespace Game.UI
 
         private SlotsLogicComponent _slotsLogicComponent;
         private CoinsComponent _coinsComponent;
+        private AudioComponent _audioComponent;
 
         private int _openFortuneCounter;
 
         [Inject]
         private void Init(GameScriptableObject gameScriptableObject, SlotsLogicComponent slotsLogicComponent,
-            CoinsComponent coinsComponent)
+            CoinsComponent coinsComponent, AudioComponent audioComponent)
         {
+            _audioComponent = audioComponent;
             _coinsComponent = coinsComponent;
+            
             _slotsLogicComponent = slotsLogicComponent;
+            
             _reelPoolData = new ReelPoolData();
 
             _reelPoolData.SlotItems = gameScriptableObject.SlotItemsArray;
@@ -106,12 +111,21 @@ namespace Game.UI
             }
             
             _reelPools[0].StopOnSlotItemAsync(result.Slots[0],_spinTimeMilliseconds, ()=>
-                _reelPools[1].StopOnSlotItemAsync(result.Slots[1],_delayTimeMilliseconds, ()=>
-                    _reelPools[2].StopOnSlotItemAsync(result.Slots[2],_delayTimeMilliseconds, () =>
-                        {
-                            OnCompleteSpin(result);
-                            _isSpin = false;
-                        })));
+            {
+                _audioComponent.Play("pick");
+                _reelPools[1].StopOnSlotItemAsync(result.Slots[1], _delayTimeMilliseconds, () =>
+                {
+                    _audioComponent.Play("pick");
+                    _reelPools[2].StopOnSlotItemAsync(result.Slots[2], _delayTimeMilliseconds, () =>
+                    {
+                        _audioComponent.Play("pick");
+                        OnCompleteSpin(result);
+                        _isSpin = false;
+                    });
+                });
+            });
+            
+            _audioComponent.Play("spin");
         }
 
         private void OnCompleteSpin(SlotsResult slotsResult)
@@ -119,6 +133,7 @@ namespace Game.UI
             if (slotsResult.ResultType != ResultType.Fail)
             {
                 _coinsComponent.AddCoins(slotsResult.Coins);
+                _audioComponent.Play("coin_win");
             }
             
             UpdateBetValueAmount();
@@ -154,11 +169,26 @@ namespace Game.UI
             _minusButton.onClick.AddListener(MinusBetValue);
             
             _resetButton.onClick.AddListener(()=>
-                SetBetValue(Math.Min(_coinsComponent.Coins, _defaultBetValue)));
+            {
+                _audioComponent.Play("button");
+                SetBetValue(Math.Min(_coinsComponent.Coins, _defaultBetValue));
+            });
             
-            _k10Button.onClick.AddListener(() => SetBetValue(10000));
-            _k20Button.onClick.AddListener(() => SetBetValue(20000));
-            _k30Button.onClick.AddListener(() => SetBetValue(30000));
+            _k10Button.onClick.AddListener(() =>
+            {
+                _audioComponent.Play("button");
+                SetBetValue(10000);
+            });
+            _k20Button.onClick.AddListener(() =>
+            {
+                _audioComponent.Play("button");
+                SetBetValue(20000);
+            });
+            _k30Button.onClick.AddListener(() =>
+            {
+                _audioComponent.Play("button");
+                SetBetValue(30000);
+            });
         }
 
         private void SetBetValue(int value)
@@ -170,12 +200,16 @@ namespace Game.UI
         
         private void AddBetValue()
         {
+            _audioComponent.Play("button");
+            
             var result = _currentBetValue + _stepAddMinusBetValue;
             SetBetValue(result);
         }
 
         private void MinusBetValue()
         {
+            _audioComponent.Play("button");
+            
             var result = _currentBetValue - _stepAddMinusBetValue;
             SetBetValue(result);
         }
