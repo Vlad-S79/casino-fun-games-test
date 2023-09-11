@@ -91,7 +91,7 @@ namespace Game.UI
         private async void StartRotateWheel()
         {
             if(!_isActive) return;
-            _isActive = true;
+            _isActive = false;
             
             _finalSlotIndex = new Random().Next(9);
             StartWheelAnimationAsync();
