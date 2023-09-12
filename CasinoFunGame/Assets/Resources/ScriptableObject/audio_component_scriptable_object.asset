@@ -14,9 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container:
     keys:
-    - 
+    - background
+    - pick
+    - spin_wheel
+    - coin_win
+    - spin
+    - button
     values:
-    - m_AssetGUID: 
+    - m_AssetGUID: 78ab71a88053e4904b738be1daede72e
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
+    - m_AssetGUID: 4b15006a1e7854d1288a911e2d891737
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: 9f02d88d1a3ca40dbb34af8ffe7f3e47
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: f5025e182d17141c3962e7a163ebe20e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: 982f5017aa9ac43278c0741cc0369531
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: b3bf8ae31531d4ceeb377abaf49edb87
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
